@@ -1,0 +1,10 @@
+name: EggFix
+version: ${project.version}
+main: me.teakivy.eggfix.Main
+api-version: 1.16
+authors: [ TeakIvy ]
+description: No More Egg Problems!
+website: https://youtube.com/teakivy
+commands:
+  eggfix:
+    description: Fix The Eggs!
