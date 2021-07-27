@@ -1,6 +1,7 @@
 package me.teakivy.eggfix;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -22,6 +23,11 @@ public final class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         // Plugin startup logic
         getServer().getPluginManager().registerEvents(this, this);
+        this.saveDefaultConfig();
+
+        if (getConfig().getBoolean("check-on-chunk-load")) {
+            getServer().getPluginManager().registerEvents(new ChunkLoadEvent(), this);
+        }
     }
 
     @EventHandler
