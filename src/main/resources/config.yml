@@ -1,0 +1,5 @@
+# EggFix Config
+
+# Whether or not to check for entities whenever a chunk is loaded. This can be very taxing on the server, so only use it when necessary.
+# To reload the config, you must restart the server. (remember to save this file!)
+check-on-chunk-load: false
