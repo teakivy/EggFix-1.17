@@ -15,11 +15,12 @@ public class ChunkLoadEvent implements Listener {
     @EventHandler
     public void onLoad(org.bukkit.event.world.ChunkLoadEvent event) {
         Chunk chunk = event.getChunk();
-        for (LivingEntity entity : chunk.getLivingEntities()) {
-            if (entity.getType() != EntityType.PLAYER) {
-				if (Objects.requireNonNull(entity.getEquipment()).getItemInMainHand().getType() == Material.EGG) {
-					entity.remove();
-				}
+        for (Entity entity : chunk.getEntities()) {
+            if (entity.getType() != EntityType.PLAYER && entity instanceof LivingEntity) {
+                LivingEntity lEntity = (LivingEntity) entity;
+                if (Objects.requireNonNull(lEntity.getEquipment()).getItemInMainHand().getType() == Material.EGG) {
+                    entity.remove();
+                }
             }
         }
     }
