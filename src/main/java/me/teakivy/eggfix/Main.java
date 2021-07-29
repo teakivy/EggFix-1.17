@@ -1,8 +1,6 @@
 package me.teakivy.eggfix;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Chunk;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
@@ -44,33 +42,37 @@ public final class Main extends JavaPlugin implements Listener {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (command.getName().equalsIgnoreCase("eggfix")) {
-			if(sender instanceof Player) {
+            if(sender instanceof Player) {
 
-				if(!sender.isOp()) {
-					sender.sendMessage(ChatColor.RED + "You need to have OP to run this command!");
-                	return true;
-				}
-			}
+                if(!sender.isOp()) {
+                    sender.sendMessage(ChatColor.RED + "You need to have OP to run this command!");
+                    return true;
+                }
+            }
 
-			int count = 0;
+            int count = 0;
 
-			for(World world : Bukkit.getWorlds()) {
-				for(LivingEntity entity : world.getLivingEntities()) {
-					if (entity.getType() != EntityType.PLAYER && Objects.requireNonNull(entity.getEquipment()).getItemInMainHand().getType() == Material.EGG) {
-						entity.remove();
-						count++;
-					}
-				}
-			}
+            for(World world : Bukkit.getWorlds()) {
+                for(LivingEntity entity : world.getLivingEntities()) {
+                    if (entity.getType() != EntityType.PLAYER && Objects.requireNonNull(entity.getEquipment()).getItemInMainHand().getType() == Material.EGG) {
+                        entity.remove();
+                        count++;
+                    }
+                }
+            }
 
-			sender.sendMessage(
-				"\n" + ChatColor.GRAY + "---------------" + "\n" + 
-				ChatColor.YELLOW + "Removed " + 
-				ChatColor.GOLD.toString() + ChatColor.BOLD + count + 
-				ChatColor.RESET.toString() + ChatColor.YELLOW + " Mobs Holding Eggs!" + "\n" + 
-				ChatColor.GRAY + "---------------" + "\n");
+            if (sender instanceof Player) {
+                sender.sendMessage(
+                        "\n" + ChatColor.GRAY + "---------------" + "\n" +
+                                ChatColor.YELLOW + "Removed " +
+                                ChatColor.GOLD.toString() + ChatColor.BOLD + count +
+                                ChatColor.RESET.toString() + ChatColor.YELLOW + " Mobs Holding Eggs!" + "\n" +
+                                ChatColor.GRAY + "---------------" + "\n");
+                return true;
+            }
+            sender.sendMessage("Removed " + count + " Mobs Holding Eggs");
 
-			return true;
+            return true;
 
         }
 
